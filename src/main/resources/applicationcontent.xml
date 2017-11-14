@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://cxf.apache.org/jaxws
+    http://cxf.apache.org/schemas/jaxws.xsd"
+       default-autowire="byName">
+    <!-- 配置属性加载器 -->
+    <bean id = "propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath*:mq.properties</value>
+            </list>
+        </property>
+    </bean>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.lc.mmqdemo"></context:component-scan>
+
+    <bean id="config" class = "com.lc.mmqdemo.common.Config">
+        <property name="mqURL" value="${mq.url}}"/>
+        <property name="mqQueue" value="${mq.mqQueue}"/>
+        <property name="mqUserName" value="${mq.mqUsername}"/>
+        <property name="mqPassword" value="${mq.mqPassword}"/>
+        <property name="jdbcDriver" value="${jdbc.driver}"/>
+        <property name="jdbcURL" value="${jdbc.url}"/>
+        <property name="jdbcUserName" value="${jdbc.username}"/>
+        <property name="jdbcPassword" value="${jdbc.password}"/>
+    </bean>
+</beans>
